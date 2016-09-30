@@ -11,7 +11,7 @@ from xbee_gateway import XBeeGateway
 decoder = Decoder()
 xbg = XBeeGateway()
 
-decoder.register_callback(decoder.print_dictionary)
+decoder.register_callback(decoder.print_dictionary_unsorted)
 xbg.register_callback(decoder.decode_data)
 
 

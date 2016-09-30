@@ -48,6 +48,10 @@ class Decoder:
     for key, value in orderedData.iteritems():
       print key + ": " + str(value) 
 
+  def print_dictionary_unsorted(self, dataDict):
+    for key, value in dataDict.iteritems():
+	print key + ": " + str(value)
+
   def register_callback(self, callback):
     self.callbacks.append(callback)
 
