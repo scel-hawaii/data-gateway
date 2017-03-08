@@ -22,9 +22,9 @@ class Decoder:
       'ga_legacy': 'HHBI'+'B'+'H'*6+'H'*6+'IhH'+'H'*20,
       '0': 'HHIH', #Heartbeat schema
       '1': 'HHIHHIhHH', #Apple schema
-      '2': 'HHIHHHHHI', #Cranberry schema
-      '3': 'HHIHHIHHI',  #Dragonfruit Schema
- 	  '5': 'HHIfff'
+      '2': 'HHIHHHHHIH', #Cranberry schema 
+      '3': 'HHIHHIHHI',  #Dragonfruit Schema (H at end is for voltage debugging requested by hardware team)
+ 	  '5': 'HHIfff', #GPS Data
 	}
     self.callbacks = []
 
@@ -197,6 +197,11 @@ class Decoder:
       dataDict["temp_cK"] = unpacked_data[6]
       dataDict["humidity_pct"] = unpacked_data[7]
       dataDict["press_pa"] = unpacked_data[8]
+
+      # write to debug voltage file
+
+      with open('dragonfruit_voltage_debug.csv', 'a') as csvfile:
+	csvfile.write(dataDict["time_received"] + ',' + unpacked_data[9])
 
     elif self.schema_num == 0: #heartbeat schema
       dataDict["schema"] = unpacked_data[0]
